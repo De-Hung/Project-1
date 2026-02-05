@@ -1,0 +1,555 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, #3a3838 30%, #961111 30%);
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    overflow: auto;
+    height: auto;
+}
+
+header {
+    position: fixed;
+    background-color: transparent;
+    padding: 10px 12px;
+    right: 0;
+    max-width: 100%;
+    margin: 20px auto;
+    border-radius: 8px;
+    z-index: 100;
+}
+
+.nav-links {
+    pointer-events: auto;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-links li {
+    margin: 0 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    position: relative;
+    padding-bottom: 3px;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* TOGGLE THEME BUTTON START */
+#toggle-btn {
+    margin: -8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+
+    background-color: black;
+    border-radius:10px;
+    border: 1px solid #ff0000;
+    box-shadow: 0 0 5px #ff0000, inset 0 0 5px #ff0000;
+
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+    font-family: Courier;
+    font-size: inherit;
+}
+
+#toggle-btn:hover {
+    color: #ff0000;
+    background: transparent;
+    transform: scale(1.05);
+}
+
+#toggle-btn:active {
+    transform: scale(0.95) translateY(2px);
+}
+/* TOGGLE THEME BUTTON END */
+
+/* HOME PAGE STUFF START */
+.home-page .content-container {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+/* static page */
+.index-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin-left: 3%;
+
+    text-align: left;
+
+    z-index: 2;
+    pointer-events: none;
+}
+
+.text {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    max-width: 40vw;
+
+    pointer-events: auto;
+    z-index: 20;
+    color: white;
+}
+
+/* buttons */
+.index-buttons {
+    flex-direction: row;
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    z-index: 60;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    border: 1px solid white;
+    color: white;
+
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn i {
+    font-size: 18px;
+}
+
+.btn:hover {
+    background-color: white;
+    color: #961111; /* Changes text to match your red theme on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* bottom part start */
+.scroll {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    pointer-events: none;
+
+    margin-top: 100vh;
+    margin-bottom: 20px;
+
+    z-index: 10;
+    width: 100%;
+    gap: 4vw;
+}
+
+.spacer {
+    height: 10vh;
+}
+
+.white-box {
+    background: white;
+    width: 45%;
+    height: 16vw;
+
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    padding: 30px;
+
+    color: #333;
+
+    z-index: 30;
+    pointer-events: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.white-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+.white-box ul {
+    list-style-type: square;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.white-box li {
+    margin-bottom: 2px;
+    color: #444;
+}
+/* bottom part end */
+
+/* name */
+.hero-name {
+    font-size: 12vw;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    
+    position: absolute;
+    top: 3vw;
+    left: 1.7vw;
+
+    z-index: -1;/* Behind paragraphs */
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.aggie-year {
+    position: absolute;
+    top: 19vw; 
+    left: 2.6vw; 
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 5;
+    
+    color: white;
+    text-transform: uppercase;
+}
+
+.horizontal-line {
+    height: 1px;
+    width: 60px;
+    background-color: white; 
+    display: inline-block;
+}
+
+/* pictures */
+.images {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+.hero-image {
+    position: absolute;
+    bottom: -10px;
+    left: 12%;
+    height:72%;
+    filter: grayscale(100%) contrast(100%);
+    
+    z-index: 2; /* Behind text but above the name */
+    transition: transform 0.5s ease;
+    pointer-events: auto;
+}
+
+.hero-image:hover {
+    transform: scale(1.05);
+    filter: grayscale(0%) contrast(110%);
+}
+
+.hero2-image {
+    position: absolute;
+    bottom: -10px;
+    left: 26%;
+    height:50%;
+    filter: grayscale(100%) contrast(100%);
+    
+    z-index: 2; /* Behind text but above the name */
+    transition: transform 0.5s ease;
+    pointer-events: auto;
+}
+
+.hero2-image:hover {
+    transform: scale(1.05);
+    filter: grayscale(0%) contrast(110%);
+}
+
+/*content container*/
+.content-container {
+    position: relative;
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 5%;
+
+    overflow: visible;
+}
+
+.home-page .content-container h1, 
+.home-page .content-container p {
+    color: white;
+}
+/* HOME PAGE STUFF END */
+
+/* PORTFOLIO PAGE START */
+.port-page {
+    position: relative;
+    width: 100%;
+    padding-top: 30vh;
+}
+
+/* title */
+.port-title {
+    font-size: 12vw;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    
+    position: absolute;
+    top: 3vw;
+    left: 5vw;
+
+    z-index: -1;/* Behind paragraphs */
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* text boxes */
+.projects-content {
+    margin-top: 20vh;
+    margin-left: 4.2vw;
+    width: 90%;
+    padding-bottom: 20px;
+}
+
+.projects-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    gap: 2vw;
+    width: 100%;
+}
+
+.project-card {
+    background: white;
+    width: 30%; 
+    min-height: 40vh;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    
+    text-align: left; 
+    transition: transform 0.3s ease;
+}
+
+.projects-content h1 {
+    color: white;
+    margin-bottom: 40px;
+    text-align: left; 
+    padding-left: 2%; 
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+/* PORTFOLIO PAGE END */
+
+/* QUALIFICATIONS PAGE START */
+/* title */
+.qual-title {
+    font-size: 12vw;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    
+    position: absolute;
+    top: 3vw;
+    left: 5vw;
+
+    z-index: -1;/* Behind paragraphs */
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.qual-page {
+    position: relative;
+    width: 100%;
+    padding-top: 100px; /* Space for header */
+}
+
+/* Reusing the title style from Portfolio */
+.qual-title {
+    font-size: 10vw; /* Slightly smaller to fit 'QUALIFICATIONS' */
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    position: absolute;
+    top: 4vw;
+    left: 5vw;
+    z-index: -1;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Specific content wrapper for Qualifications */
+.qual-content {
+    margin-top: 34vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    color: white; /* Make intro text white */
+}
+
+.qual-content p {
+    color: white;
+}
+
+/* Resume Box styling */
+.resume {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin: 10px 0;
+}
+
+.resume p {
+    color: #333;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.resume a {
+    color: #961111;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.qual-content h1, 
+.qual-content h3 {
+    color: white;
+}
+/* QUALIFICATIONS PAGE END */
+
+/* SERVICE PAGE START */
+/* title */
+.serv-title {
+    font-size: 12vw;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    
+    position: absolute;
+    top: 3vw;
+    left: 5vw;
+
+    z-index: -1;/* Behind paragraphs */
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* picture */
+.sidebar-image-container {
+    position: fixed;
+    top: 50%;
+    left: 2.5%;
+    z-index: -2;
+    width: 25vw;
+    transform: translateY(-50%);
+}
+
+.sidebar-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* text boxes */
+.service-layout {
+    position: relative;
+    width: 100%;
+    padding-top: 20.2%;
+}
+
+.service-content {
+    margin-left: 35%;
+    width: 60%;
+    text-align: left;
+}
+
+.service-content h1 {
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+.service-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    margin-bottom: 25px;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateX(10px);
+}
+
+.service-card h3 {
+    color: #961111;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    color: #333;
+}
+/* SERVICE PAGE END */
+
+/* for pictures */
+.project-card, .service-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0; /* Remove padding from card so image hits the edges */
+    overflow: hidden; /* Clips the image corners to match the card radius */
+}
+
+.card-image {
+    width: 100%;
+    height: 180px; /* Set a fixed height for consistency */
+    object-fit: cover; /* Crops the image to fill the area without stretching */
+    border-bottom: 2px solid #eee; /* Optional: adds a separator line */
+}
+
+.project-card h3, 
+.project-card p,
+.service-card h3,
+.service-card p {
+    padding: 10px 20px;
+}
+
+.project-card h3, .service-card h3 {
+    margin-top: 10px;
+}

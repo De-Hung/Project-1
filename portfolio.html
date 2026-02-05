@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio | Technical Projects</title>
+    <link id="theme-sheet" rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="qualifications.html">Qualifications</a></li>
+                <li><a href="service.html">Service</a></li>
+                <li><a href="genai.html">AI Page</a></li>
+                <li><button id="toggle-btn" onclick="toggleStyle()">Toggle Theme</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="port-page">
+        <div class="port-title">Portfolio</div>
+
+        <div class="projects-content">
+            <h1>Technical Projects</h1>
+            <div class="projects-grid">
+                <section class="project-card">
+                    <img src="trafficlight.png" alt="project1" class="card-image">
+                    <h3>Emulated Traffic Light System</h3>
+                    <p>Designed and prototyped a hardware timing circuit using a electrical circuit components and coded using Raspberry Pi and C.</p>
+                    <p>Verified pulse-width modulation and frequency timings via LTspice simulations prior to creating the circuit on the breadboard.</p>
+                </section>
+                
+                <section class="project-card">
+                    <img src="bankcode.png" alt="project2" class="card-image">
+                    <h3>Distributed Banking System</h3>
+                    <p>Developed a high-concurrency engine in C++ utilizing CP/IP Sockets and POSIX threads.</p>
+                    <p>Engineered a custom network request channel to simulate secure, multi-server financial transactions.</p>
+                </section>
+
+                <section class="project-card">
+                    <img src="datathon.png" alt="project3" class="card-image">
+                    <h3>TAMU Datathon</h3>
+                    <p>Analyzed and simulated a single-cycle datapath to calculate CPI stalls and optimize instruction flow.</p>
+                    <p>Focused on cache memory organization and pipeline performance to reduce memory-access latency.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
