@@ -5,8 +5,14 @@
 }
 
 body {
-    background: linear-gradient(to right, #3a3838 30%, #961111 30%);
+    background: 
+    url(redback.png) right / 70% no-repeat,
+    url(grayback3.jpg) left / 30% no-repeat,
+    linear-gradient(to right, #3a3838 40%, #961111 50%);
+
+    background-blend-mode: multiply; /* makes background colored, not black and white */
     background-attachment: fixed;
+
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
     line-height: 1.6;
@@ -182,6 +188,50 @@ header {
     height: 10vh;
 }
 
+/* scroll arrow */
+.scroll-indicator {
+    position: absolute;
+    bottom: 8vh;
+    left: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 70; /* Above images and text */
+}
+
+.scroll-indicator span {
+    display: block;
+    width: 35px;
+    height: 35px;
+    
+    border-bottom: 4px solid #ebe6e6;
+    border-right: 4px solid #ea0909;
+
+    transform: rotate(45deg);
+    margin: -10px;
+    animation: pulse-down 2s infinite;
+}
+
+.scroll-indicator span:nth-child(2) {
+    animation-delay: -0.2s;
+}
+
+/* The Pulsing Animation */
+@keyframes pulse-down {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-20px, -20px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(20px, 20px);
+    }
+}
+
 .white-box {
     background: white;
     width: 45%;
@@ -262,9 +312,9 @@ header {
 .hero-image {
     position: absolute;
     bottom: -10px;
-    left: 12%;
+    left: 15%;
     height:72%;
-    filter: grayscale(100%) contrast(100%);
+    filter: contrast(110%);
     
     z-index: 2; /* Behind text but above the name */
     transition: transform 0.5s ease;
@@ -273,25 +323,27 @@ header {
 
 .hero-image:hover {
     transform: scale(1.05);
-    filter: grayscale(0%) contrast(110%);
+    filter: contrast(100%);
 }
 
+/* picture 2
 .hero2-image {
     position: absolute;
     bottom: -10px;
     left: 26%;
     height:50%;
-    filter: grayscale(100%) contrast(100%);
+    filter: contrast(110%);
     
-    z-index: 2; /* Behind text but above the name */
+    z-index: 2;
     transition: transform 0.5s ease;
     pointer-events: auto;
 }
 
 .hero2-image:hover {
     transform: scale(1.05);
-    filter: grayscale(0%) contrast(110%);
+    filter: contrast(100%);
 }
+*/
 
 /*content container*/
 .content-container {
@@ -418,7 +470,7 @@ header {
     margin-left: auto;
     margin-right: auto;
     width: 80%;
-    color: white; /* Make intro text white */
+    color: white;
 }
 
 .qual-content p {
@@ -428,7 +480,7 @@ header {
 /* Resume Box styling */
 .resume {
     background: white;
-    padding: 10px;
+    padding: 5px;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     margin: 10px 0;
@@ -443,7 +495,26 @@ header {
 .resume a {
     color: #961111;
     font-weight: bold;
-    text-decoration: underline;
+}
+
+/* download button */
+.resume-button-container {
+    text-align: center;
+}
+
+.resume-button-container .btn {
+    background-color: #961111;
+    color: white;
+    pointer-events: auto;
+
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.resume-button-container .btn:hover {
+    background-color: #3a3838; /* Dark Gray on hover */
+    color: white;
+    border-color: #3a3838;
 }
 
 .qual-content h1, 
@@ -471,19 +542,64 @@ header {
 
 /* picture */
 .sidebar-image-container {
-    position: fixed;
-    top: 50%;
+    position: absolute; 
+    top: 25vh;
     left: 2.5%;
-    z-index: -2;
     width: 25vw;
-    transform: translateY(-50%);
+    z-index: 1;
+
+    /* Grid Layout for 4 pictures */
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-areas: 
+        "top top"
+        "mid-left mid-right"
+        "bottom bottom";
+    gap: 15px;
 }
 
-.sidebar-image {
+.sidebar-image-container2 {
+    position: absolute; 
+    top: 147vh;
+    left: 2.5%;
+    width: 25vw;
+    z-index: 1;
+
+    /* Grid Layout for 4 pictures */
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-areas: 
+        "top top"
+        "mid-left mid-right"
+        "bottom bottom";
+    gap: 15px;
+}
+
+.sidebar-custom-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-areas: 
+        "top top"
+        "mid-left mid-right"
+        "bottom bottom";
+
+    gap: 15px;
+    padding: 10px;
+    margin-top: 20vh;
+}
+
+.img-top { grid-area: top; }
+.img-mid-left { grid-area: mid-left; }
+.img-mid-right { grid-area: mid-right; }
+.img-bottom { grid-area: bottom; }
+
+.sidebar-custom-layout img {
     width: 100%;
-    height: auto;
+    height: 39vh;
+    object-fit: cover;
+
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 /* text boxes */
@@ -515,7 +631,7 @@ header {
 }
 
 .service-card:hover {
-    transform: translateX(10px);
+    transform: translateX(-10px);
 }
 
 .service-card h3 {
@@ -532,15 +648,15 @@ header {
 .project-card, .service-card {
     display: flex;
     flex-direction: column;
-    padding: 0; /* Remove padding from card so image hits the edges */
-    overflow: hidden; /* Clips the image corners to match the card radius */
+    padding: 0;
+    overflow: hidden;
 }
 
 .card-image {
     width: 100%;
-    height: 180px; /* Set a fixed height for consistency */
-    object-fit: cover; /* Crops the image to fill the area without stretching */
-    border-bottom: 2px solid #eee; /* Optional: adds a separator line */
+    height: 40vh;
+    object-fit: cover;
+    border-bottom: 2px solid #eee;
 }
 
 .project-card h3, 

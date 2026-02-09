@@ -2,47 +2,206 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AI Discovery | Engineering Portfolio</title>
-    </head>
-<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; line-height: 1.6;">
+    <title>AI Lab | Stress Game</title>
+    <link id="theme-sheet" rel="stylesheet" href="style1.css">
+    <style>
+        .ai-container {
+            margin-top: 15vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            z-index: 10;
+            position: relative;
+        }
 
-    <header style="background-color: #500000; padding: 20px 0; text-align: center;">
+        #game-canvas {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #961111;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(150, 17, 17, 0.5);
+            cursor: crosshair;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        .instructions {
+            max-width: 600px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .ai-title {
+            font-size: 8vw;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.2);
+            position: absolute;
+            top: -5vw;
+            z-index: -1;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body class="ai-page">
+    <header>
         <nav>
-            <ul style="list-style: none; display: flex; justify-content: center; margin: 0; padding: 0;">
-                <li style="margin: 0 20px;"><a href="index.html" style="color: white; text-decoration: none; font-weight: bold;">Home</a></li>
-                <li style="margin: 0 20px;"><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold;">Portfolio</a></li>
-                <li style="margin: 0 20px;"><a href="qualifications.html" style="color: white; text-decoration: none; font-weight: bold;">Qualifications</a></li>
-                <li style="margin: 0 20px;"><a href="service.html" style="color: white; text-decoration: none; font-weight: bold;">Service</a></li>
-                <li style="margin: 0 20px;"><a href="genai.html" style="color: #ffc000; text-decoration: none; font-weight: bold;">AI Page</a></li>
-                <li><button id="toggle-btn" onclick="toggleStyle()">Toggle Theme</button></li>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="qualifications.html">Qualifications</a></li>
+                <li><a href="service.html">Service</a></li>
+                <li><a href="genai.html">AI Page</a></li>
+                <li><button id="toggle-btn" class="disabled-btn">Change Theme Disabled</button></li>
             </ul>
         </nav>
     </header>
 
-    <div style="padding: 40px; max-width: 900px; margin: 0 auto;">
-        <h1 style="color: #500000; border-bottom: 2px solid #500000; padding-bottom: 10px;">AI-Generated Content</h1>
+    <main class="ai-container">
+        <div class="port-title">AI Page</div>
         
-        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 30px;">
-            <label style="font-weight: bold; color: #333;">Final Generation Prompt:</label><br>
-            <textarea style="width: 100%; height: 120px; margin-top: 10px; font-family: monospace; padding: 10px; border: 1px solid #ccc; border-radius: 4px; overflow-y: scroll;" readonly>
-                "Generate an awesome webpage that can hold my personal portfolio..."
-            </textarea>
+        <div class="stats">
+            <div>NODES PROCESSED: <span id="score">0</span></div>
+            <div>STRESS LEVEL: <span id="stress">0</span>%</div>
         </div>
 
-        <div style="border-left: 5px solid #500000; padding: 20px; background-color: #fff; border-radius: 0 8px 8px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <h2 style="margin-top: 0; color: #500000;">The Power of AI in Engineering</h2>
-            <p>AI Usage...</p>
-            <br>
-            <p>can talk about what AI is used for in computer engineering, how proficient I am with it.</p>
-            <p>can show how it can affect a website like mine, etc.</p>
-        </div>
-        
-        <p style="margin-top: 30px; text-align: center;">
-            Learn more about <a href="https://openai.com" target="_blank" style="color: #500000; font-weight: bold;">OpenAI</a>, 
-            <a href="https://deepmind.google" target="_blank" style="color: #500000; font-weight: bold;">Google DeepMind</a>, or 
-            <a href="https://www.nvidia.com/en-us/ai-data-center/" target="_blank" style="color: #500000; font-weight: bold;">NVIDIA AI Solutions</a>.
-        </p>
-    </div>
+        <canvas id="game-canvas" width="1000" height="600"></canvas>
 
+        <div class="instructions">
+            <h3>Mission: Artificial Intelligence Stability</h3>
+            <p>Nodes are appearing in the neural network. If they turn bright red and "pop," the AI crashes. 
+            Click the nodes to process the data and keep the stress level low!</p>
+            
+            <div class="index-buttons" style="justify-content: center; margin-top: 20px;">
+                <a href="#" class="btn" onclick="location.reload()">Reset Stress</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const stressElement = document.getElementById('stress');
+
+        let score = 0;
+        let stress = 0;
+        let nodes = [];
+        let gameActive = true;
+
+        class Node {
+            constructor() {
+                this.x = Math.random() * (canvas.width - 40) + 20;
+                this.y = Math.random() * (canvas.height - 40) + 20;
+                this.radius = 5;
+                this.maxRadius = 35;
+                this.growthSpeed = 0.2 + (score * 0.01);
+                this.color = 255; // Starts white
+            }
+
+            update() {
+                this.radius += this.growthSpeed;
+                // Transition color to Maroon/Red as it grows
+                this.color = Math.max(0, 255 - (this.radius * 6));
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgb(255, ${this.color}, ${this.color})`;
+                ctx.fill();
+                ctx.strokeStyle = '#961111';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.closePath();
+            }
+        }
+
+        function spawnNode() {
+            if (gameActive) {
+                nodes.push(new Node());
+                setTimeout(spawnNode, Math.max(300, 1000 - (score * 10)));
+            }
+        }
+
+        function update() {
+            if (!gameActive) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw connections (Neural Net Look)
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(150, 17, 17, 0.2)';
+            for(let i=0; i<nodes.length; i++) {
+                for(let j=i+1; j<nodes.length; j++) {
+                    ctx.moveTo(nodes[i].x, nodes[i].y);
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                }
+            }
+            ctx.stroke();
+
+            for (let i = nodes.length - 1; i >= 0; i--) {
+                nodes[i].update();
+                nodes[i].draw();
+
+                if (nodes[i].radius > nodes[i].maxRadius) {
+                    nodes.splice(i, 1);
+                    stress += 10;
+                    stressElement.innerText = stress;
+                    if (stress >= 100) {
+                        gameOver();
+                    }
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            for (let i = nodes.length - 1; i >= 0; i--) {
+                const dist = Math.hypot(nodes[i].x - mouseX, nodes[i].y - mouseY);
+                if (dist < nodes[i].radius + 10) {
+                    nodes.splice(i, 1);
+                    score++;
+                    scoreElement.innerText = score;
+                    stress = Math.max(0, stress - 2);
+                    stressElement.innerText = stress;
+                    break;
+                }
+            }
+        });
+
+        function gameOver() {
+            gameActive = false;
+            ctx.fillStyle = "rgba(0,0,0,0.8)";
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+            ctx.fillStyle = "#961111";
+            ctx.font = "40px Arial";
+            ctx.textAlign = "center";
+            ctx.fillText("AI CORE CRITICAL - SYSTEM HALTED", canvas.width/2, canvas.height/2);
+            ctx.fillStyle = "white";
+            ctx.font = "20px Arial";
+            ctx.fillText("Nodes Processed: " + score, canvas.width/2, canvas.height/2 + 40);
+            ctx.fillText("Refresh to Reboot System", canvas.width/2, canvas.height/2 + 80);
+        }
+
+        spawnNode();
+        update();
+    </script>
 </body>
 </html>

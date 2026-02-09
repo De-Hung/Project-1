@@ -1,12 +1,10 @@
-window.onload = function() {
-    const savedTheme = localStorage.getItem('theme');
-    const themeElement = document.getElementById('theme-sheet');
-    
-    // If a theme was previously saved, apply it
-    if (savedTheme) {
-        themeElement.setAttribute('href', savedTheme);
-    }
-};
+const savedTheme = localStorage.getItem('theme');
+const themeElement = document.getElementById('theme-sheet');
+
+// If a theme was previously saved, apply it
+if (savedTheme) {
+    themeElement.setAttribute('href', savedTheme);
+}
 
 function toggleStyle() {
     let themeElement = document.getElementById('theme-sheet');

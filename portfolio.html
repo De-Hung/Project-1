@@ -28,22 +28,44 @@
                 <section class="project-card">
                     <img src="trafficlight.png" alt="project1" class="card-image">
                     <h3>Emulated Traffic Light System</h3>
-                    <p>Designed and prototyped a hardware timing circuit using a electrical circuit components and coded using Raspberry Pi and C.</p>
-                    <p>Verified pulse-width modulation and frequency timings via LTspice simulations prior to creating the circuit on the breadboard.</p>
+                    <p>Designed and prototyped an autonomous Emulated Traffic Light System that integrates hardware timing circuits with embedded software control. 
+                        The purpose of the project was to improve light timing and ordering for an everyday traffic system.</p>
+                    <p>The project involved building a multi-stage logic circuit utilizing a timer to generate clock pulses, which were then sequenced through a 
+                        decade counter to manage the Red, Yellow, and Green light transitions. To ensure high reliability and precise timing intervals, I performed 
+                        extensive LTspice simulations to verify frequency responses and pulse-width modulation behaviors. These simulations allowed me to optimize timing and 
+                        reduce errors before creating the physical circuitry.</p>
+                    <p>Along with the hardware aspect, the Raspberry Pi was what controlled all the signals and logic. I developed custom control logic in C to oversee 
+                        system states and automate the durations of each cycle, ultimately resulting in a fully functional, breadboard circuit that mirrors real-world 
+                        traffic signaling logic. Through the use of a button, I am able to emulate the logic of a crosswalk system additionally with the timers of each 
+                        street on the intersection individually.</p>
                 </section>
                 
                 <section class="project-card">
                     <img src="bankcode.png" alt="project2" class="card-image">
                     <h3>Distributed Banking System</h3>
-                    <p>Developed a high-concurrency engine in C++ utilizing CP/IP Sockets and POSIX threads.</p>
-                    <p>Engineered a custom network request channel to simulate secure, multi-server financial transactions.</p>
+                    <p>I developed a Distributed Banking System in C++ designed to take in high quantities of data and requests. The project was created to handle complex, 
+                        real-time data processing for the financial aspect of a 'supposed' bank system. By leveraging TCP/IP Sockets and POSIX threads, I implemented a scalable 
+                        multi-threaded architecture that has the ability to manage simultaneous client and server side interactions whilst taking into account efficiency and 
+                        CPU usage.</p>
+                    <p>A core part of the project was the coding of a local network request channel, which I designed to simulate secure, multi-server transactions across an 
+                        environment emulating real-world transactions. To optimize performance and speed, I integrated a thread pool that could handle asynchronous events 
+                        using POSIX signals. This implementation ensured that the system didn't crash under high quantities of requests.</p>
+                    <p>This project effectively bridged low-level systems programming with distributed systems logic, a high-level coding task, and provided a comprehensive 
+                        simulation of real-world banking infrastructure; albeit very limited.</p>
                 </section>
 
                 <section class="project-card">
                     <img src="datathon.png" alt="project3" class="card-image">
                     <h3>TAMU Datathon</h3>
-                    <p>Analyzed and simulated a single-cycle datapath to calculate CPI stalls and optimize instruction flow.</p>
-                    <p>Focused on cache memory organization and pipeline performance to reduce memory-access latency.</p>
+                    <p>I partook in the TAMU Datathon, where I developed a sophisticated data processing algorithm to analyze and categorize complex hospital datasets, focusing 
+                        on real-world healthcare metrics such as patient demographics, diseases, case urgency, mortality rates, etc. My objective was to create a unified system 
+                        capable of sorting and integrating present medical records, as well as future incoming data in order to identify underlying clinical patterns and trends.</p>
+                    <p>My code of choice was python for its accessible computation and sorting logic possibilities. I created an algorithm that prioritized and classified entries 
+                        based on medical importance and disease severity, while accounting for age and time spent in-clinic. This involved implementing data structures to handle 
+                        the wide range of information stored in a hospital, ranging from gender-specific health outcomes to death rate analysis. This ensured that newly added data 
+                        was immediately added into the existing database framework with ease.</p>
+                    <p>The resulting algorithm provided a scalable foundation for predictive healthcare analytics, demonstrating a valuable connection between systems programming 
+                        and medical decision-making.</p>
                 </section>
             </div>
         </div>

@@ -6,11 +6,10 @@
 
 body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #050505; /* Darker for higher contrast */
+    background-color: #050505;
     color: #ff0000;
     display: flex; 
     min-height: 100vh;
-
     border: 10px double #440000;
     overflow-x: hidden;
 }
@@ -37,7 +36,7 @@ header {
     padding: 40px 20px;
     display: flex;
     flex-direction: column;
-    z-index: 1001; /* Stay above scanlines */
+    z-index: 1001;
 }
 
 .nav-links {
@@ -49,12 +48,11 @@ header {
     border: 1px solid #ff0000;
     padding: 10px;
     transition: all 0.2s ease;
-    clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0 100%); /* Techy angled corner */
+    clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0 100%);
 }
 
 .nav-links li:hover {
     background-color: #ff0000;
-    transform: translateX(5px);
 }
 
 .nav-links a {
@@ -63,14 +61,12 @@ header {
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 2px;
-    display: block;
 }
 
 .nav-links li:hover a {
     color: #000;
 }
 
-/* HUD Style Toggle Button */
 #toggle-btn {
     background: #110000;
     border: 1px solid #ff0000;
@@ -81,17 +77,10 @@ header {
     cursor: pointer;
     font-family: 'Courier New', Courier, monospace;
     text-transform: uppercase;
-    box-shadow: inset 0 0 10px #ff0000;
 }
 
-#toggle-btn:hover {
-    background: #ff0000;
-    color: #000;
-    box-shadow: 0 0 20px #ff0000;
-}
-
-/* Content Area Fixes for Grid Pages */
-.content-container, .portfolio-layout, .qual-page, .service-layout {
+/* Content Layout with Separation Lines */
+.content-container, .port-page, .qual-page, .service-layout {
     flex-grow: 1;
     padding: 60px;
     background: radial-gradient(circle at center, #1a0000 0%, #050505 100%);
@@ -100,30 +89,135 @@ header {
 
 h1 {
     font-size: 3rem;
-    text-shadow: 0 0 15px #ff0000;
-    border-bottom: 2px solid #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+    padding-bottom: 10px;
     margin-bottom: 40px;
     text-transform: uppercase;
 }
 
-.project-card, .service-card, .resume {
+/* Section Box Wrapper */
+.index-page, .text {
+    border: 1px solid #440000; /* Subtle box for text */
+    padding: 30px;
+    margin-bottom: 40px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    border-left: 3px solid #ff0000; /* Vertical line marker */
+    padding-left: 15px;
+}
+
+/* Grid Boxes for Interests */
+.scroll {
+    display: grid;;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.white-box {
+    background: rgba(20, 0, 0, 0.8) !important;
+    border: 1px solid #ff0000;
+    padding: 20px;
+    color: #ffaaaa;
+}
+
+.white-box h2 {
+    border-bottom: 1px solid #ff0000;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+/* Project and Service Cards */
+.service-content, .projects-grid {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 20px;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.project-card, .resume {
     background: rgba(0, 0, 0, 0.8);
     border: 1px solid #ff0000;
-    box-shadow: 0 0 15px #440000;
-    color: #ffaaaa;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-.project-card h3, .service-card h3 {
-    color: #ff0000;
-    text-shadow: 0 0 5px #ff0000;
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ff0000;
+    margin-bottom: 15px;
 }
 
-.project-card p, .service-card p {
-    color: #ffaaaa;
+.sidebar-image-container {
+    position: absolute;
+    width: 280px;
+    margin-bottom: 30px;
+    border: 2px solid #ff0000;
+    padding: 10px;
+    background: rgba(20, 0, 0, 0.5);
+    
+    /* Grid Layout */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "top top"
+        "mid-left mid-right"
+        "bottom bottom";
+    gap: 10px;
 }
 
-/* Fix for Sidebar Images in Service Page */
-.sidebar-image {
-    filter: grayscale(100%) sepia(100%) hue-rotate(-50deg) saturate(500%) !important; /* Forces it into red-scale */
+.sidebar-image-container2 {
+    position: relative;
+    width: 280px;
+    margin-bottom: 30px;
+    border: 2px solid #ff0000;
+    padding: 10px;
+    background: rgba(20, 0, 0, 0.5);
+    
+    /* Grid Layout */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "top top"
+        "mid-left mid-right"
+        "bottom bottom";
+    gap: 10px;
+}
+
+.img-top { grid-area: top; }
+.img-mid-left { grid-area: mid-left; }
+.img-mid-right { grid-area: mid-right; }
+.img-bottom { grid-area: bottom; }
+
+.sidebar-image-container img {
+    width: 100%;
+    height: 150px; /* Adjust height as needed */
+    object-fit: cover;
+    border: 1px solid #ff0000;
+    filter: grayscale(100%) contrast(120%) sepia(100%) hue-rotate(-50deg); /* Aggie Red tint */
+    transition: all 0.3s ease;
+}
+
+.sidebar-image-container2 img {
+    width: 100%;
+    height: 150px; /* Adjust height as needed */
+    object-fit: cover;
+    border: 1px solid #ff0000;
+    filter: grayscale(100%) contrast(120%) sepia(100%) hue-rotate(-50deg); /* Aggie Red tint */
+    transition: all 0.3s ease;
+}
+
+.sidebar-custom-layout {
+    width: 100%;
+    height: auto;
     border: 1px solid #ff0000;
 }
